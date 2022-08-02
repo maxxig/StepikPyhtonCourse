@@ -1,5 +1,6 @@
 def func_apply(f, x):
-    return map(f,x)
+    t = list(map(f,x))
+    return t
 
 def add3(x):
     return x + 3
