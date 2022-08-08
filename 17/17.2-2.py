@@ -1,0 +1,5 @@
+#f = open('17.2-1.txt')
+f = open(input())
+file = f.readlines()
+f.close()
+print(file[-2])
