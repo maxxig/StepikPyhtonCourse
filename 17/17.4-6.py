@@ -1,15 +1,18 @@
-import re
-with open('file.txt') as file:
-    data = file.readlines()
-    file.seek(0)
-    data1 = file.read()
-lines = len(data)
-rep = re.compile("[^a-zA-Z, \d, \n]")
-rep1 = re.compile("[^a-zA-Z]")
+with open('goats.txt') as input_file:
+    data = input_file.readlines()
+mode = 0
+my_dict = dict()
+for i, v in enumerate(data):
+    v = v.rstrip()
+    if i == 0:
+        continue
+    if v == 'GOATS':
+        mode = 1
+        continue
+    if mode == 0:
+        my_dict[v] = 0
+    if mode == 1:
+        my_dict[v] += 1
 
-new_data = rep.sub("", data1).replace('\n',' ')
-new_data2 = rep1.sub("", data1)
-words = len(new_data.split())
-symb = len(new_data2)
-
-print(f'Input file contains:\n{symb} letters\n{words} words\n{lines} lines')
+with open('answer.txt', 'w') as output_file:
+    print(*list(map(lambda x:f'{x[0]}', list(filter(lambda x:x[1] > sum(my_dict.values()) * 0.07, my_dict.items())))), sep = '\n', end = '', file=output_file)
